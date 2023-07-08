@@ -17,9 +17,11 @@ class TemaController extends Controller
 
     public function create(Request $request){
         $message = 'Elemento creado correctamente';
+        $clase = 'alert alert-primary';
         if(isset($request->id) && !empty($request->id)){
             $tema = Tema::find($request->id);
             $message = 'Elemento actualizado correctamente';
+            $clase = 'alert alert-success';
         }else{
             $tema = new Tema();
         }
@@ -32,7 +34,7 @@ class TemaController extends Controller
         //     'nombreTema'=>$tema
         // ]);
 
-        return redirect('temas')->with('msg', $message)->with('clase', 'alert alert-success');
+        return redirect('temas')->with('msg', $message)->with('clase',  $clase);
     }
 
     public function delete($id){
