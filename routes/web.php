@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\TemaController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -29,8 +30,19 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/about', [App\Http\Controllers\HomeController::class, 'about'])->name('about');
 
-Route::get('/temas', [TemaController::class, 'index'])->name('temas');
-Route::post('/temas', [TemaController::class, 'create'])->name('temas');
 
-Route::get('/temas/delete/{id}', [TemaController::class, 'delete'])->name('deleteTema');
-Route::get('/temas/editar/{id}', [TemaController::class, 'editar'])->name('editarTema');
+Route::prefix('/temas')->middleware('auth')->group(function(){
+    Route::get('/', [TemaController::class, 'index'])->name('temas');
+    Route::post('/', [TemaController::class, 'create'])->name('temas');
+    Route::get('/delete/{id}', [TemaController::class, 'delete'])->name('deleteTema');
+    Route::get('/editar/{id}', [TemaController::class, 'editar'])->name('editarTema');
+});
+
+Route::prefix('/posts')->middleware('auth')->group(function(){
+    Route::get('/', [PostController::class, 'index'])->name('posts');
+    Route::post('/', [PostController::class, 'create'])->name('posts');
+    Route::get('/delete/{id}', [PostController::class, 'delete'])->name('deletePost');
+    Route::get('/editar/{id}', [PostController::class, 'editar'])->name('editarPost');
+});
+
+
