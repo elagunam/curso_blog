@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TemaController;
+use App\Http\Livewire\Usuarios;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -44,5 +45,7 @@ Route::prefix('/posts')->middleware('auth')->group(function(){
     Route::get('/delete/{id}', [PostController::class, 'delete'])->name('deletePost');
     Route::get('/editar/{id}', [PostController::class, 'editar'])->name('editarPost');
 });
+
+Route::get('/usuarios', Usuarios::class);
 
 

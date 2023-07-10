@@ -12,11 +12,13 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+
     <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
-    <script>
+    {{-- <script>
     CKEDITOR.replace( 'summary-ckeditor' );
-    </script>
+    </script> --}}
     <!-- Scripts -->
+    @livewireStyles
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
@@ -24,7 +26,11 @@
         @include('componentes.navbar')
         <main class="py-4">
             @yield('content')
+            @isset($slot)
+                {{$slot}}
+            @endisset
         </main>
     </div>
+    @livewireScripts
 </body>
 </html>
