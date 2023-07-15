@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Inicio;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TemaController;
 use App\Http\Livewire\Usuarios;
@@ -17,9 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [Inicio::class, 'inicio'])->name('welcome');
 
 // Route::get('/about', function(){
 //     $nombre = 'Eleazar Laguna';
@@ -46,6 +45,8 @@ Route::prefix('/posts')->middleware('auth')->group(function(){
     Route::get('/editar/{id}', [PostController::class, 'editar'])->name('editarPost');
 });
 
-Route::get('/usuarios', Usuarios::class);
+Route::get('/usuarios', Usuarios::class)->middleware(['auth', 'rol:administrador'])->name('usuarios');
+
+// Route::get('/comprar', function(){})->middleware('rol');
 
 

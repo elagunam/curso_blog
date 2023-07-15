@@ -3,13 +3,6 @@
 <div class="container">
     <h1 class="display-3">Ultimas Entradas</h1>
     <hr>
-    <div class="card">
-        <div class="card-header">
-            Titulo
-        </div>
-        <div class="card-body">
-            Contenido
-        </div>
-    </div>
+   @each('componentes.cardPost', $posts, 'post')
 </div>
 @endsection

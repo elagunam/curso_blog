@@ -32,6 +32,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('temas') }}">Temas</a>
                     </li>
+                    @if (Auth::user()->rol && Auth::user()->rol == 'administrador')
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('usuarios') }}">Usuarios</a>
+                    </li>
+                    @endif
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('posts') }}">Posts</a>
                     </li>
