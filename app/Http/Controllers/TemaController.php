@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tema;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TemaController extends Controller
 {
@@ -15,7 +16,19 @@ class TemaController extends Controller
         ]);
     }
 
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'nombreTema' => ['required', 'string', 'max:255'],
+        ]);
+    }
+
     public function create(Request $request){
+        $validated = $request->validate([
+            'nombreTema' => 'required|string|max:255|min:4',
+        ]);
+
+
         $message = 'Elemento creado correctamente';
         $clase = 'alert alert-primary';
         if(isset($request->id) && !empty($request->id)){

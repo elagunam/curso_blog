@@ -12,7 +12,18 @@
                 <input type="text" name="tema" id="tema" class="form-control" value="{{session('nombreTema') ? session('nombreTema') : null}}">
                 <input type="submit" value="{{session('id') ? 'Actualizar' : 'Crear'}}" class="btn btn-dark mt-4">
             </div>
+            @error('nombreTema')
+            <div class="alert alert-danger mt-4">
+                {{$message}}
+                {{-- <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul> --}}
+            </div>
+            @enderror
         </div>
+
     </form>
     @if (session('msg'))
     <div class="{{session('clase')}} mt-2 mb-2" role="alert">
